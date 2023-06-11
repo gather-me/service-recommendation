@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: recommendation
+  r2dbc:
+    username: ${database.user}
+    password: ${database.password}
+    url: r2dbc:postgresql://${database.endpoint}/${database.name}?preparedStatementCacheQueries=0
+  flyway:
+    user: ${database.user}
+    password: ${database.password}
+    url: jdbc:postgresql://${database.migration.endpoint}/${database.name}
+    baselineOnMigrate: true
+    table: flyway_${spring.application.name}_schema_history
+
+gather:
+  server:
+    recommendation-engine:
+      url: "http://localhost:5000"
+    event:
+      url: "http://localhost:8082"
+
+# Database
+database:
+  endpoint: ${DATABASE_ENDPOINT}
+  migration.endpoint: ${DATABASE_MIGRATION_ENDPOINT}
+  name: ${DATABASE_NAME}
+  password: ${DATABASE_PASSWORD}
+  user: ${DATABASE_USER}
+
+springdoc:
+  swagger-ui:
+    path: /
+
+server:
+  port: 8085
