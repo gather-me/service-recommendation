@@ -14,10 +14,4 @@ class WebClientConfig(
         @Value("\${gather.server.recommendation-engine.url}")
         baseUrl: String
     ) = builder.baseUrl(baseUrl).build()
-
-    @Bean
-    fun eventWebClient(
-        @Value("\${gather.server.event.url}")
-        baseUrl: String
-    ) = builder.baseUrl(baseUrl).build()
 }

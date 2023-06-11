@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service
 class RecommendationService(
     private val recommendationClient: RecommendationEngineClient
 ) {
-    suspend fun getRecommendation(eventType: EventType, userId: Long): List<PredictionRecommendationModel>
-    = recommendationClient.getRecommendation(eventType, userId).collectList().awaitSingle()
+    suspend fun getRecommendation(eventType: EventType, userId: Long): List<PredictionRecommendationModel> =
+        recommendationClient.getRecommendation(eventType, userId).collectList().awaitSingle()
     suspend fun getGroupRecommendation(eventType: EventType, userIds: List<Long>): List<PredictionRecommendationModel> {
         if (userIds.count() > 3 || userIds.count() < 2) throw Exception("Invalid count")
         return recommendationClient.getGroupRecommendation(eventType, userIds).collectList().awaitSingle()

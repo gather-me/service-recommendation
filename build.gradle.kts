@@ -33,27 +33,6 @@ dependencies {
 	testImplementation("io.projectreactor:reactor-test")
 }
 
-tasks.bootRun {
-	doFirst {
-		systemProperty("database.endpoint", System.getenv("DATABASE_ENDPOINT") ?: "localhost:5433")
-		systemProperty("database.migration.endpoint", System.getenv("DATABASE_MIGRATION_ENDPOINT") ?: "localhost:5433")
-		systemProperty("database.name", System.getenv("DATABASE_NAME") ?: "gather_test")
-		systemProperty("database.user", System.getenv("DATABASE_USER") ?: "db_user")
-		systemProperty("database.password", System.getenv("DATABASE_PASSWORD") ?: "db_pass")
-	}
-}
-
-
-tasks.test {
-	doFirst {
-		systemProperty("database.endpoint", System.getenv("DATABASE_ENDPOINT") ?: "localhost:5433")
-		systemProperty("database.migration.endpoint", System.getenv("DATABASE_MIGRATION_ENDPOINT") ?: "localhost:5433")
-		systemProperty("database.name", System.getenv("DATABASE_NAME") ?: "gather_test_test")
-		systemProperty("database.user", System.getenv("DATABASE_USER") ?: "db_user")
-		systemProperty("database.password", System.getenv("DATABASE_PASSWORD") ?: "db_pass")
-	}
-}
-
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
