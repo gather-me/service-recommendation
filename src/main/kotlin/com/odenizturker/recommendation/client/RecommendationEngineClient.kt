@@ -1,7 +1,7 @@
 package com.odenizturker.recommendation.client
 
 import com.odenizturker.recommendation.model.EventType
-import com.odenizturker.recommendation.model.PredictionRecommendationModel
+import com.odenizturker.recommendation.model.RecommendationModel
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
@@ -13,14 +13,14 @@ class RecommendationEngineClient(
     @Qualifier("recommendationEngineWebClient")
     private val client: WebClient
 ) {
-    fun getRecommendation(eventType: EventType, userId: Long): Flux<PredictionRecommendationModel> =
+    fun getRecommendation(eventType: EventType, userId: Long): Flux<RecommendationModel> =
         client
             .get()
             .uri("/events/{eventType}/predict/rate/{userId}", eventType, userId)
             .retrieve()
             .bodyToFlux()
 
-    fun getGroupRecommendation(eventType: EventType, userIds: List<Long>): Flux<PredictionRecommendationModel> =
+    fun getGroupRecommendation(eventType: EventType, userIds: List<Long>): Flux<RecommendationModel> =
         client
             .get()
             .uri {
